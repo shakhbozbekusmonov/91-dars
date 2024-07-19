@@ -8,8 +8,10 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { APIClient } from '@/services/api-client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -19,14 +21,21 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
+const apiClient = new APIClient('/account/login/')
+
 const LoginForm = () => {
 	const form = useForm<FormData>({
 		resolver: zodResolver(schema),
 	})
 
-	const onSubmit = (data: FormData) => {
-		console.log(data)
-		form.reset()
+	const onSubmit = async (data: FormData) => {
+		try {
+			const res = await apiClient.post(data)
+			console.log(res)
+			form.reset()
+		} catch (error) {
+			toast.error((error as Error).message)
+		}
 	}
 	return (
 		<Form {...form}>
