@@ -1,6 +1,5 @@
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
-import SiteMenu from "./components/SiteMenu";
 
 const App = () => {
   return (
@@ -10,7 +9,6 @@ const App = () => {
       <Button className="rounded-full" size="icon">
         +
       </Button>
-      <SiteMenu />
     </div>
   );
 };

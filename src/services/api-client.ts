@@ -11,15 +11,21 @@ class APIClient<T> {
 		this.endpoint = endpoint
 	}
 
-	getAll = async (config: AxiosRequestConfig) => {
+	getAll = async (config?: AxiosRequestConfig) => {
 		return await axiosInstance
 			.get<T>(this.endpoint, config)
 			.then(res => res.data)
 	}
 
-	get = async (id: number, config: AxiosRequestConfig) => {
+	get = async (id: number, config?: AxiosRequestConfig) => {
 		return await axiosInstance
 			.get<T>(this.endpoint + '/' + id, config)
+			.then(res => res.data)
+	}
+
+	post = async (data: T, config?: AxiosRequestConfig) => {
+		return await axiosInstance
+			.post<T>(this.endpoint, data, config)
 			.then(res => res.data)
 	}
 }
