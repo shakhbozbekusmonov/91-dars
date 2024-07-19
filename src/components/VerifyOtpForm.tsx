@@ -5,10 +5,14 @@ import {
 	InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { Label } from '@/components/ui/label'
+import { APIClient } from '@/services/api-client'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+
+const apiClient = new APIClient('/account/verify-otp/')
 
 const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
-	const [countdown, setCountdown] = useState(1) // 2 minutes in seconds
+	const [countdown, setCountdown] = useState(120) // 2 minutes in seconds
 	const [canResend, setCanResend] = useState(false)
 	const [otp, setOtp] = useState('')
 
@@ -23,8 +27,21 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 		}
 	}, [countdown])
 
-	const onSubmit = () => {
-		console.log(otp)
+	const onSubmit = async () => {
+		const email = window.localStorage.getItem('user-email')
+
+		try {
+			const res = await apiClient.post({
+				code: otp,
+				email: email,
+				verify_type: 'register',
+			})
+			console.log(res)
+			onSwitch()
+		} catch (error) {
+			toast.error((error as Error).message)
+		}
+
 		onSwitch()
 	}
 

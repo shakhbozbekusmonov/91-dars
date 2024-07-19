@@ -1,19 +1,15 @@
-import SiteHeader from "@/components/SiteHeader";
-import { Button } from "@/components/ui/button";
-import Drinks from "@/components/Drinks";
+import SiteHeader from '@/components/SiteHeader'
+import { ToastContainer } from 'react-toastify'
+
 
 const App = () => {
-  return (
-    <div>
-      <SiteHeader />
-      <Button>Knopka</Button>
-      <Button className="rounded-full" size="icon">
-        +
-      </Button>
+	return (
+		<>
+			<SiteHeader />
 
-      <Drinks />
-    </div>
-  );
-};
+			<ToastContainer />
+		</>
+	)
+}
 
-export default App;
+export default App
