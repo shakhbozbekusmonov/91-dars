@@ -27,7 +27,7 @@ const Kombo = () => {
                                 <div className='flex justify-between'>
                                     <span className='text-[24px] font-[700]'>25,000 UZS</span>
                                     <Button className='text-[26px] pb-1' size='icon'>+</Button>
-                                </div>
+                             </div>
                             </div>
                         </li>
                       
