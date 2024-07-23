@@ -74,7 +74,7 @@ const BurgerSection = () => {
                         <li>
                             <Card className="rounded-[12px] pt-4 pr-[30px] pl-[21px] pb-[22px] flex flex-row-reverse border-[#9797972E]">
                                 <CardHeader className="pl-[21px] pt-1">
-                                    <CardTitle className="font-medium md:text-[24px] md:leading-[29px] text-[18px] leading-[22px] text-[#222124] md:mb-[11px] mb-[7px] after:content-[''] after:w-6 after:h-6 after:ml-4">Hamburger</CardTitle>
+                                    <CardTitle className="font-medium md:text-[24px] md:leading-[29px] text-[18px] leading-[22px] text-[#222124] md:mb-[11px] mb-[7px]">Hamburger</CardTitle>
                                     <CardDescription className="font-medium text-[12px] leading-[15px] md:leading-[17px] md:text-[14px] text-[#222124] opacity-40 md:mb-[44px] mb-[15px] md:pr-4">
                                         Горячая закуска с митболами
                                         из говядины, томатами,
@@ -98,7 +98,7 @@ const BurgerSection = () => {
                         <li>
                             <Card className="rounded-[12px] pt-4 pr-[30px] pl-[21px] pb-[22px] flex flex-row-reverse border-[#9797972E]">
                                 <CardHeader className="pl-[21px] pt-1">
-                                    <CardTitle className="font-medium md:text-[24px] md:leading-[29px] text-[18px] leading-[22px] text-[#222124] md:mb-[11px] mb-[7px] after:content-[''] after:w-6 after:h-6 after:ml-4">Double Burger</CardTitle>
+                                    <CardTitle className="font-medium md:text-[24px] md:leading-[29px] text-[18px] leading-[22px] text-[#222124] md:mb-[11px] mb-[7px]">Double Burger</CardTitle>
                                     <CardDescription className="font-medium text-[12px] leading-[15px] md:leading-[17px] md:text-[14px] text-[#222124] opacity-40 md:mb-[44px] mb-[15px] md:pr-4">
                                         Горячая закуска с митболами
                                         из говядины, томатами,
