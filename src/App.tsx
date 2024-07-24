@@ -1,25 +1,15 @@
-import SiteHeader from "@/components/SiteHeader";
-import { ToastContainer } from "react-toastify";
-import useUser from "./hooks/useUser";
+import SiteHeader from '@/components/SiteHeader'
+import { ToastContainer } from 'react-toastify'
+
 
 const App = () => {
-  const { data: users, error, isLoading } = useUser();
+	return (
+		<>
+			<SiteHeader />
 
-  if (error) return <div>{error.message}</div>;
-
-  if (isLoading) return <div>Loading...</div>;
-
-  return (
-    <>
-      <SiteHeader />
-      <ul>
-        {users?.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-      <ToastContainer />
-    </>
-  );
-};
+			<ToastContainer />
+		</>
+	)
+}
 
 export default App;

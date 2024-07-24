@@ -75,9 +75,6 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      boxShadow: {
-        pitsaFire: "0px 7px 40px 0px rgba(238, 39, 68, 0.36)",
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],
