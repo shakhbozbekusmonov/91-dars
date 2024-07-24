@@ -1,15 +1,24 @@
 import SiteHeader from "@/components/SiteHeader";
-import { Button } from "@/components/ui/button";
+import { ToastContainer } from "react-toastify";
+import useUser from "./hooks/useUser";
 
 const App = () => {
+  const { data: users, error, isLoading } = useUser();
+
+  if (error) return <div>{error.message}</div>;
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
-    <div>
+    <>
       <SiteHeader />
-      <Button>Knopka</Button>
-      <Button className="rounded-full" size="icon">
-        +
-      </Button>
-    </div>
+      <ul>
+        {users?.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+      <ToastContainer />
+    </>
   );
 };
 

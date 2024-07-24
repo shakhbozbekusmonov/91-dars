@@ -1,5 +1,6 @@
 import SitePitsa from "./SitePitsa";
 import { Button } from "./ui/button";
+import CustomButton from "./CustomButton";
 
 const SiteMenu = () => {
   return (
@@ -28,21 +29,6 @@ const SiteMenu = () => {
       </div>
       <SitePitsa />
     </>
-  );
-};
-
-interface Props {
-  text: string;
-}
-
-const CustomButton = (props: Props) => {
-  return (
-    <a
-      href="/"
-      className="px-6 py-4 rounded-lg hover:text-white hover:bg-primary"
-    >
-      {props.text}
-    </a>
   );
 };
 
