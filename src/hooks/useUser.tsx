@@ -1,19 +1,13 @@
-import { APIClient } from "@/services/api-client";
-import { useQuery } from "@tanstack/react-query";
+import { APIClient } from '@/services/api-client'
+import { useQuery } from '@tanstack/react-query'
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-const apiClient = new APIClient<User[]>("/users");
+const apiClient = new APIClient('/users/profile/')
 
 const useUser = () => {
-  return useQuery<User[], Error>({
-    queryKey: ["users"],
-    queryFn: () => apiClient.getAll(),
-  });
-};
+	return useQuery({
+		queryKey: ['user'],
+		queryFn: () => apiClient.getAll(),
+	})
+}
 
-export default useUser;
+export default useUser

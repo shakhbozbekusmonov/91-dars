@@ -5,7 +5,7 @@ import BurgerSection from './components/BurgerSection'
 
 import SiteHeader from '@/components/SiteHeader'
 import { ToastContainer } from 'react-toastify'
-
+import Profile from './components/Profile'
 
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
 		</div>
 
 		<>
+			{/* <Profile /> */}
 			<SiteHeader />
 
 			<ToastContainer />
@@ -29,4 +30,4 @@ const App = () => {
 	)
 }
 
-export default App;
+export default App

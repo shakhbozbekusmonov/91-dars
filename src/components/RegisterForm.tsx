@@ -8,22 +8,20 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { APIClient } from '@/services/api-client'
+import { axiosInstance } from '@/services/api-client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
 
 const schema = z.object({
-	first_name: z.string().min(3, 'First name must be at least 3 characters'),
-	last_name: z.string().min(3, 'Last name must be at least 3 characters'),
+	username: z.string().min(3, 'Username must be at least 3 characters'),
 	email: z.string({ required_error: 'Email is required' }).email(),
 	password: z.string().min(8, 'Password must be at least 8 characters'),
+	confirm_password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
 type FormData = z.infer<typeof schema>
-
-const apiClient = new APIClient('/account/register/')
 
 const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 	const form = useForm<FormData>({
@@ -32,10 +30,14 @@ const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 
 	const onSubmit = async (data: FormData) => {
 		try {
-			const res = await apiClient.post(data)
-			console.log(res)
+			const res = await axiosInstance
+				.post('/users/signup/', data)
+				.then(res => res.data)
 
-			window.localStorage.setItem('user-email', data.email)
+			if (res) {
+				window.localStorage.setItem('access', res.access)
+				window.localStorage.setItem('refresh', res.refresh)
+			}
 
 			form.reset()
 			onSwitch()
@@ -43,15 +45,16 @@ const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 			toast.error((error as Error).message)
 		}
 	}
+
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-3'>
 				<FormField
 					control={form.control}
-					name='first_name'
+					name='username'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>First Name</FormLabel>
+							<FormLabel>Username</FormLabel>
 							<FormControl>
 								<Input className='rounded-[4px]' {...field} />
 							</FormControl>
@@ -59,19 +62,7 @@ const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name='last_name'
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Last Name</FormLabel>
-							<FormControl>
-								<Input className='rounded-[4px]' {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+
 				<FormField
 					control={form.control}
 					name='email'
@@ -91,6 +82,19 @@ const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Password</FormLabel>
+							<FormControl>
+								<Input className='rounded-[4px]' type='password' {...field} />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name='confirm_password'
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Confirm Password</FormLabel>
 							<FormControl>
 								<Input className='rounded-[4px]' type='password' {...field} />
 							</FormControl>

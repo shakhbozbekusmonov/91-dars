@@ -21,7 +21,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-const apiClient = new APIClient('/account/login/')
+const apiClient = new APIClient('/users/login/')
 
 const LoginForm = () => {
 	const form = useForm<FormData>({
@@ -31,7 +31,9 @@ const LoginForm = () => {
 	const onSubmit = async (data: FormData) => {
 		try {
 			const res = await apiClient.post(data)
+
 			console.log(res)
+
 			form.reset()
 		} catch (error) {
 			toast.error((error as Error).message)
