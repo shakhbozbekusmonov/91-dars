@@ -7,6 +7,8 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import useUser from '@/hooks/useUser'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from './ui/button'
 
 const Profile = () => {
 	const { data: user, error, isLoading } = useUser()
@@ -19,7 +21,15 @@ const Profile = () => {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger>Open</DropdownMenuTrigger>
+			<DropdownMenuTrigger
+				className={cn(
+					buttonVariants({
+						variant: 'outline',
+					})
+				)}
+			>
+				{user && user?.username}
+			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />

@@ -16,7 +16,7 @@ import { useState } from 'react'
 const Account = () => {
 	const [currentForm, setCurrentForm] = useState<
 		'register' | 'verify' | 'login'
-	>('register')
+	>('login')
 
 	const handleFormSwitch = (form: 'register' | 'verify' | 'login') => {
 		setCurrentForm(form)

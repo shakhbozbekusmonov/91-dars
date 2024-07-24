@@ -5,7 +5,7 @@ import {
 	InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { Label } from '@/components/ui/label'
-import { APIClient } from '@/services/api-client'
+import { APIClient, axiosInstance } from '@/services/api-client'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -29,10 +29,17 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 
 	const onSubmit = async () => {
 		try {
-			const res = await apiClient.post({
-				code: otp,
-			})
-			console.log(res)
+			const res = await axiosInstance
+				.post('/users/verify/', {
+					code: otp,
+				})
+				.then(res => res.data)
+			
+			if (res) {
+				window.localStorage.setItem('access', res.access)
+				window.localStorage.setItem('refresh', res.refresh)
+			}
+
 			onSwitch()
 		} catch (error) {
 			toast.error((error as Error).message)
