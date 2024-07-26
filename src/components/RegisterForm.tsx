@@ -8,8 +8,10 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { AccountContext } from '@/context/account.provider'
 import { axiosInstance } from '@/services/api-client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -23,7 +25,9 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
+const RegisterForm = () => {
+	const { handleFormSwitch } = useContext(AccountContext)
+
 	const form = useForm<FormData>({
 		resolver: zodResolver(schema),
 	})
@@ -40,7 +44,7 @@ const RegisterForm = ({ onSwitch }: { onSwitch: () => void }) => {
 			}
 
 			form.reset()
-			onSwitch()
+			handleFormSwitch('verify')
 		} catch (error) {
 			toast.error((error as Error).message)
 		}

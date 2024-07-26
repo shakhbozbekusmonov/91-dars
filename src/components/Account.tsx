@@ -9,18 +9,13 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog'
 import VerifyOtpForm from '@/components/VerifyOtpForm'
+import { AccountContext } from '@/context/account.provider'
 import { cn } from '@/lib/utils'
 import { User } from 'lucide-react'
-import { useState } from 'react'
+import { useContext } from 'react'
 
 const Account = () => {
-	const [currentForm, setCurrentForm] = useState<
-		'register' | 'verify' | 'login'
-	>('login')
-
-	const handleFormSwitch = (form: 'register' | 'verify' | 'login') => {
-		setCurrentForm(form)
-	}
+	const { currentForm } = useContext(AccountContext)
 
 	return (
 		<Dialog>
@@ -38,12 +33,8 @@ const Account = () => {
 					<DialogTitle>Account</DialogTitle>
 				</DialogHeader>
 
-				{currentForm === 'register' && (
-					<RegisterForm onSwitch={() => handleFormSwitch('verify')} />
-				)}
-				{currentForm === 'verify' && (
-					<VerifyOtpForm onSwitch={() => handleFormSwitch('login')} />
-				)}
+				{currentForm === 'register' && <RegisterForm />}
+				{currentForm === 'verify' && <VerifyOtpForm />}
 				{currentForm === 'login' && <LoginForm />}
 			</DialogContent>
 		</Dialog>

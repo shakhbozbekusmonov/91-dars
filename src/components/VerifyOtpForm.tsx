@@ -5,13 +5,14 @@ import {
 	InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { Label } from '@/components/ui/label'
-import { APIClient, axiosInstance } from '@/services/api-client'
-import { useEffect, useState } from 'react'
+import { AccountContext } from '@/context/account.provider'
+import { axiosInstance } from '@/services/api-client'
+import { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-const apiClient = new APIClient('/users/verify/')
+const VerifyOtpForm = () => {
+	const { handleFormSwitch } = useContext(AccountContext)
 
-const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 	const [countdown, setCountdown] = useState(120) // 2 minutes in seconds
 	const [canResend, setCanResend] = useState(false)
 	const [otp, setOtp] = useState('')
@@ -34,18 +35,16 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 					code: otp,
 				})
 				.then(res => res.data)
-			
+
 			if (res) {
 				window.localStorage.setItem('access', res.access)
 				window.localStorage.setItem('refresh', res.refresh)
 			}
 
-			onSwitch()
+			handleFormSwitch('login')
 		} catch (error) {
 			toast.error((error as Error).message)
 		}
-
-		onSwitch()
 	}
 
 	const handleResendOtp = () => {
