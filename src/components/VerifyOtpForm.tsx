@@ -5,11 +5,11 @@ import {
 	InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { Label } from '@/components/ui/label'
-import { APIClient } from '@/services/api-client'
+import { APIClient, axiosInstance } from '@/services/api-client'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-const apiClient = new APIClient('/account/verify-otp/')
+const apiClient = new APIClient('/users/verify/')
 
 const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 	const [countdown, setCountdown] = useState(120) // 2 minutes in seconds
@@ -28,15 +28,18 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 	}, [countdown])
 
 	const onSubmit = async () => {
-		const email = window.localStorage.getItem('user-email')
-
 		try {
-			const res = await apiClient.post({
-				code: otp,
-				email: email,
-				verify_type: 'register',
-			})
-			console.log(res)
+			const res = await axiosInstance
+				.post('/users/verify/', {
+					code: otp,
+				})
+				.then(res => res.data)
+			
+			if (res) {
+				window.localStorage.setItem('access', res.access)
+				window.localStorage.setItem('refresh', res.refresh)
+			}
+
 			onSwitch()
 		} catch (error) {
 			toast.error((error as Error).message)
@@ -48,15 +51,13 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 	const handleResendOtp = () => {
 		setCountdown(120)
 		setCanResend(false)
-		// Add your resend OTP logic here
-		console.log('OTP resent')
 	}
 
 	return (
 		<div className='flex flex-col space-y-3 items-center'>
 			<Label>One time password</Label>
-			<InputOTP maxLength={6} onChange={e => setOtp(e)}>
-				{[...Array(6)].map((_, index) => (
+			<InputOTP maxLength={5} onChange={e => setOtp(e)}>
+				{[...Array(5)].map((_, index) => (
 					<InputOTPGroup key={index}>
 						<InputOTPSlot index={index} />
 					</InputOTPGroup>
@@ -74,7 +75,7 @@ const VerifyOtpForm = ({ onSwitch }: { onSwitch: () => void }) => {
 				</Button>
 			)}
 
-			<Button type='submit' onClick={onSubmit} disabled={otp.length < 6}>
+			<Button type='submit' onClick={onSubmit} disabled={otp.length < 5}>
 				Verify
 			</Button>
 		</div>
