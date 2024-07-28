@@ -1,11 +1,12 @@
 interface Props {
   text: string;
+  linkTo: string;
 }
 
-const CustomButton = (props: Props) => {
+const CustomLink = (props: Props) => {
   return (
     <a
-      href="/"
+      href={props.linkTo}
       className="px-6 py-4 rounded-lg hover:text-white hover:bg-primary"
     >
       {props.text}
@@ -13,4 +14,4 @@ const CustomButton = (props: Props) => {
   );
 };
 
-export default CustomButton;
+export default CustomLink;

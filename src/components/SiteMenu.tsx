@@ -1,18 +1,18 @@
-import SitePitsa from "./SitePitsa";
+import Pitsa from "./Pitsa";
 import { Button } from "./ui/button";
-import CustomButton from "./CustomButton";
+import CustomLink from "./CustomLink";
 
 const SiteMenu = () => {
   return (
     <>
       <div className="container flex items-center justify-between pt-10 border-t mt-20">
-        <CustomButton text="Barchasi" />
-        <CustomButton text="Pitsa" />
-        <CustomButton text="Burger" />
-        <CustomButton text="Kombo" />
-        <CustomButton text="Salat" />
-        <CustomButton text="Shirinliklar" />
-        <CustomButton text="Ichimliklar" />
+        <CustomLink linkTo="#Barchasi" text="Barchasi" />
+        <CustomLink linkTo="#Pitsa" text="Pitsa" />
+        <CustomLink linkTo="#Burger" text="Burger" />
+        <CustomLink linkTo="#Kombo" text="Kombo" />
+        <CustomLink linkTo="#Salat" text="Salat" />
+        <CustomLink linkTo="#Shirinliklar" text="Shirinliklar" />
+        <CustomLink linkTo="#Ichimliklar" text="Ichimliklar" />
         <Button
           variant="secondary"
           className="gap-4 px-10 py-4 hover:bg-primary"
@@ -27,7 +27,7 @@ const SiteMenu = () => {
           Filtr
         </Button>
       </div>
-      <SitePitsa />
+      <Pitsa />
     </>
   );
 };
