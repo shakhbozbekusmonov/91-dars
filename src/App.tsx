@@ -1,20 +1,13 @@
-import Counter from '@/components/Counter'
-import { CounterContext } from '@/context/counter.provider'
-import { useContext } from 'react'
-import { ToastContainer } from 'react-toastify'
 import SiteHeader from './components/SiteHead'
+import SiteFooter from './components/SiteFooter'
 
 const App = () => {
-	const { number } = useContext(CounterContext)
 
 	return (
 		<>
 			<SiteHeader />
+			<SiteFooter/>
 
-			<h1>{number}</h1>
-			<Counter />
-
-			<ToastContainer />
 		</>
 	)
 }
