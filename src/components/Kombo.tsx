@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button'
 
 const Kombo = () => {
     return (
-        <section className='container'>
+        <section>
+            <div classNmae='conatiner'>
             <div className="flex flex-col">
                 <h2 className='text-[36px] md:text-[52px] font-[700] mb-[30px]'>Kombo</h2>
                 <ul className='grid grid-cols-1 md:grid-cols-2  gap-[30px]'>
@@ -47,6 +48,7 @@ const Kombo = () => {
 
                 </ul>
             </div>
+          </div>
         </section>
 
 
