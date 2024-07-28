@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 
 const pitsaDetailes = [
   {
@@ -45,16 +51,22 @@ const pitsaDetailes = [
   },
 ];
 
-const SitePitsa = () => {
+const Pitsa = () => {
   return (
     <div className="container mt-[105px] mb-24">
       <h2 className="text-5xl mb-14">Pitsa</h2>
-      <div className="flex flex-wrap gap-10 md:justify-center xl:justify-stretch">
+      <div className="grid grid-cols-2 gap-10">
         {pitsaDetailes.map((pitsa, index) => (
-          <Card key={index} className="w-[540px] flex rounded-sm">
+          <Card key={index} className="w-full flex rounded-sm">
             <CardHeader>
-              <CardTitle className="relative">
-                <img width={"180px"} height={"180px"} src={pitsa.img} alt="" />
+              <CardTitle className="relative w-[180px]">
+                <img
+                  className="w-[180px] h-[180px]"
+                  width={"180px"}
+                  height={"180px"}
+                  src={pitsa.img}
+                  alt=""
+                />
                 {pitsa.isTop && (
                   <div className="absolute top-0 left-0 rounded-full p-2 bg-pitsaSub backdrop-blur-md shadow-pitsaFire">
                     <p className="text-2xl">🔥</p>
@@ -62,17 +74,19 @@ const SitePitsa = () => {
                 )}
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6 relative">
-              <h3 className="text-2xl mb-2 font-semibold">{pitsa.title}</h3>
-              <p className="w-[212px] text-sm opacity-50 mb-6">
+            <CardContent className="py-6 ml-10 w-[270px]">
+              <h3 className="text-3xl mb-2 font-semibold">{pitsa.title}</h3>
+              <p className="w-[227px] text-md opacity-50 mb-6">
                 Горячая закуска с митболами из говядины, томатами, моцареллой и
                 соусом чипотле
               </p>
-              <p className="font-bold text-2xl">{pitsa.cost} UZS</p>
-              <button className="absolute bottom-10 right-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-2xl">
+              <p className="font-bold text-3xl">{pitsa.cost} UZS</p>
+            </CardContent>
+            <CardFooter className="relative">
+              <button className="absolute bottom-6 left-0 w-14 h-14 bg-primary rounded-full flex pt-[6px] justify-center text-white text-3xl">
                 +
               </button>
-            </CardContent>
+            </CardFooter>
           </Card>
         ))}
       </div>
@@ -80,4 +94,4 @@ const SitePitsa = () => {
   );
 };
 
-export default SitePitsa;
+export default Pitsa;
